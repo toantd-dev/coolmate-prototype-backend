@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/coolmate/ecommerce-backend/internal/config"
 	"github.com/coolmate/ecommerce-backend/internal/database"
+	_ "github.com/coolmate/ecommerce-backend/docs"
 	"github.com/coolmate/ecommerce-backend/internal/middleware"
 	"github.com/coolmate/ecommerce-backend/internal/models"
 	"github.com/coolmate/ecommerce-backend/internal/handlers"
@@ -16,7 +17,24 @@ import (
 	"github.com/coolmate/ecommerce-backend/pkg/cache"
 	"github.com/coolmate/ecommerce-backend/pkg/jsondb"
 	"github.com/coolmate/ecommerce-backend/pkg/storage"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
+
+// @title           Coolmate Multivendor eCommerce API
+// @version         0.1
+// @description     Go + Gin backend for a multivendor eCommerce platform. Auth, vendor onboarding (KYC), product catalog, order splitting, commission, settlement.
+// @termsOfService  https://example.com/terms
+// @contact.name    Coolmate Team
+// @contact.email   dev@coolmate.local
+// @license.name    MIT
+// @host            localhost:8080
+// @BasePath        /api/v1
+// @schemes         http https
+// @securityDefinitions.apikey BearerAuth
+// @in              header
+// @name            Authorization
+// @description     Paste: `Bearer <accessToken>`
 
 func main() {
 	// Load config from .env
@@ -68,9 +86,10 @@ func main() {
 		log.Fatalf("Failed to migrate database: %v", err)
 	}
 
-	// Create database indexes for optimal query performance
+	// Create database indexes for optimal query performance.
+	// Auto-migrate already creates struct-tag indexes; non-fatal if extras fail.
 	if err := database.CreateIndexes(db); err != nil {
-		log.Fatalf("Failed to create indexes: %v", err)
+		log.Printf("Warning: optional custom indexes skipped: %v", err)
 	}
 
 	// Connect to Redis
@@ -163,6 +182,9 @@ func main() {
 func setupRoutes(r *gin.Engine, authHandler *handlers.AuthHandler, vendorHandler *handlers.VendorHandler, productHandler *handlers.ProductHandler, orderHandler *handlers.OrderHandler, healthHandler *handlers.HealthHandler, jwtManager *auth.JWTManager) {
 	// Health check endpoint (not under /api/v1)
 	r.GET("/health", healthHandler.HealthCheck)
+
+	// Swagger UI — browse at /swagger/index.html
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	v1 := r.Group("/api/v1")
 

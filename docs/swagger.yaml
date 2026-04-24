@@ -1,0 +1,961 @@
+basePath: /api/v1
+definitions:
+  github_com_coolmate_ecommerce-backend_internal_services.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  github_com_coolmate_ecommerce-backend_internal_services.RegisterRequest:
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      password:
+        minLength: 8
+        type: string
+      phone:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  github_com_coolmate_ecommerce-backend_internal_utils.APIResponse:
+    properties:
+      data: {}
+      errors: {}
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: dev@coolmate.local
+    name: Coolmate Team
+  description: Go + Gin backend for a multivendor eCommerce platform. Auth, vendor
+    onboarding (KYC), product catalog, order splitting, commission, settlement.
+  license:
+    name: MIT
+  termsOfService: https://example.com/terms
+  title: Coolmate Multivendor eCommerce API
+  version: "0.1"
+paths:
+  /admin/orders:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List all orders (STUB, admin)
+      tags:
+      - Orders (Admin)
+  /admin/products/{id}/approve:
+    post:
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Approve product (STUB)
+      tags:
+      - Products (Admin)
+  /admin/products/{id}/reject:
+    post:
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Reject product (STUB)
+      tags:
+      - Products (Admin)
+  /admin/products/pending-approval:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List products pending approval (STUB)
+      tags:
+      - Products (Admin)
+  /admin/vendors:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List all vendors (STUB, admin)
+      tags:
+      - Vendors (Admin)
+  /admin/vendors/{id}:
+    get:
+      parameters:
+      - description: Vendor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get vendor by ID (STUB, admin)
+      tags:
+      - Vendors (Admin)
+  /admin/vendors/{id}/approve:
+    post:
+      parameters:
+      - description: Vendor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Approve vendor (STUB, admin)
+      tags:
+      - Vendors (Admin)
+  /admin/vendors/{id}/bank-details:
+    put:
+      parameters:
+      - description: Vendor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update vendor bank details (STUB, admin only per SRS)
+      tags:
+      - Vendors (Admin)
+  /admin/vendors/{id}/commission:
+    put:
+      parameters:
+      - description: Vendor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Set per-vendor commission override (STUB, admin)
+      tags:
+      - Vendors (Admin)
+  /admin/vendors/{id}/reject:
+    post:
+      parameters:
+      - description: Vendor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Reject vendor (STUB, admin)
+      tags:
+      - Vendors (Admin)
+  /admin/vendors/{id}/settle:
+    post:
+      parameters:
+      - description: Vendor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Trigger a payout settlement (STUB, admin)
+      tags:
+      - Vendors (Admin)
+  /admin/vendors/{id}/settlements:
+    get:
+      parameters:
+      - description: Vendor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get vendor settlement history (STUB, admin)
+      tags:
+      - Vendors (Admin)
+  /admin/vendors/{id}/suspend:
+    post:
+      parameters:
+      - description: Vendor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Suspend vendor (STUB, admin)
+      tags:
+      - Vendors (Admin)
+  /admin/vendors/{id}/wallet:
+    get:
+      parameters:
+      - description: Vendor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get vendor wallet (STUB, admin)
+      tags:
+      - Vendors (Admin)
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticates a user and returns access + refresh tokens.
+      parameters:
+      - description: Login payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_services.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      summary: Login
+      tags:
+      - Auth
+  /auth/logout:
+    post:
+      consumes:
+      - application/json
+      description: Revokes the provided refresh token.
+      parameters:
+      - description: '{ refreshToken }'
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      summary: Logout
+      tags:
+      - Auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Exchange a valid refresh token for a new access + refresh token
+        pair (rotation).
+      parameters:
+      - description: '{ refreshToken }'
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      summary: Refresh access token
+      tags:
+      - Auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Creates a customer account and returns access + refresh tokens.
+      parameters:
+      - description: Registration payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_services.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      summary: Register a new customer
+      tags:
+      - Auth
+  /categories:
+    get:
+      description: Currently a stub — returns no data. Phase 1 TODO.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      summary: List categories (STUB)
+      tags:
+      - Products (Public)
+  /customer/cart:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get current cart (STUB)
+      tags:
+      - Cart & Orders (Customer)
+  /customer/cart/apply-coupon:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: '{ code }'
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Apply coupon code to cart (STUB)
+      tags:
+      - Cart & Orders (Customer)
+  /customer/cart/items:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: '{ productId, quantity }'
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Add item to cart (STUB)
+      tags:
+      - Cart & Orders (Customer)
+  /customer/cart/items/{id}:
+    delete:
+      parameters:
+      - description: Cart item ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Remove item from cart (STUB)
+      tags:
+      - Cart & Orders (Customer)
+    put:
+      parameters:
+      - description: Cart item ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update cart item quantity (STUB)
+      tags:
+      - Cart & Orders (Customer)
+  /customer/orders:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List customer order history (STUB)
+      tags:
+      - Cart & Orders (Customer)
+  /customer/orders/{id}:
+    get:
+      parameters:
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get order detail (STUB)
+      tags:
+      - Cart & Orders (Customer)
+  /customer/orders/checkout:
+    post:
+      consumes:
+      - application/json
+      description: Should split master order into per-vendor sub-orders, apply commission,
+        deduct stock. Currently returns 201 without side-effects.
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Place order — checkout cart (STUB — MVP blocker per audit)
+      tags:
+      - Cart & Orders (Customer)
+  /customer/returns:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List customer returns (STUB)
+      tags:
+      - Returns (Customer)
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Initiate return request (STUB)
+      tags:
+      - Returns (Customer)
+  /health:
+    get:
+      description: Returns 200 when the API is up and the database accepts a ping.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{ status: healthy }'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "503":
+          description: '{ status: unhealthy, error: ... }'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Liveness + DB ping
+      tags:
+      - Health
+  /products:
+    get:
+      description: Public product catalog with pagination and text search.
+      parameters:
+      - description: Page number (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Items per page (max 100, default 10)
+        in: query
+        name: per_page
+        type: integer
+      - description: Substring search on name/description
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      summary: List published products
+      tags:
+      - Products (Public)
+  /products/{slug}:
+    get:
+      description: Fetches a single published product by its URL slug.
+      parameters:
+      - description: Product slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      summary: Get product by slug
+      tags:
+      - Products (Public)
+  /vendor/agreement/accept:
+    post:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Accept current vendor agreement version (STUB)
+      tags:
+      - Vendor
+  /vendor/documents/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Upload KYC document (STUB)
+      tags:
+      - Vendor
+  /vendor/orders:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List vendor sub-orders (STUB)
+      tags:
+      - Orders (Vendor)
+  /vendor/orders/{id}/status:
+    put:
+      consumes:
+      - application/json
+      description: Vendor can only advance Pending → Ready to Ship (SRS §7.2). Not
+        enforced yet.
+      parameters:
+      - description: Sub-order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: '{ status }'
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update sub-order status (STUB)
+      tags:
+      - Orders (Vendor)
+  /vendor/products:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List vendor products (STUB)
+      tags:
+      - Products (Vendor)
+    post:
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Create product (STUB)
+      tags:
+      - Products (Vendor)
+  /vendor/products/{id}:
+    delete:
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Archive product (STUB)
+      tags:
+      - Products (Vendor)
+    put:
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update product (STUB)
+      tags:
+      - Products (Vendor)
+  /vendor/products/bulk-import:
+    post:
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Bulk import products from CSV (STUB)
+      tags:
+      - Products (Vendor)
+  /vendor/profile:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Get own vendor profile (STUB)
+      tags:
+      - Vendor
+    put:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update own vendor profile (STUB)
+      tags:
+      - Vendor
+  /vendor/register:
+    post:
+      description: Currently a stub — returns 200 OK with no side-effects. Phase 1
+        TODO.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Register as vendor (STUB)
+      tags:
+      - Vendor
+  /vendor/staff:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List vendor staff sub-accounts (STUB)
+      tags:
+      - Vendor
+    post:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Create vendor staff sub-account (STUB)
+      tags:
+      - Vendor
+  /vendor/staff/{id}:
+    delete:
+      parameters:
+      - description: Staff ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete vendor staff sub-account (STUB)
+      tags:
+      - Vendor
+    put:
+      parameters:
+      - description: Staff ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_coolmate_ecommerce-backend_internal_utils.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: Update vendor staff sub-account (STUB)
+      tags:
+      - Vendor
+schemes:
+- http
+- https
+securityDefinitions:
+  BearerAuth:
+    description: 'Paste: `Bearer <accessToken>`'
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

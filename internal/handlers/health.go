@@ -17,6 +17,14 @@ func NewHealthHandler(db *gorm.DB) *HealthHandler {
 	}
 }
 
+// HealthCheck godoc
+// @Summary      Liveness + DB ping
+// @Description  Returns 200 when the API is up and the database accepts a ping.
+// @Tags         Health
+// @Produce      json
+// @Success      200  {object}  map[string]string  "{ status: healthy }"
+// @Failure      503  {object}  map[string]string  "{ status: unhealthy, error: ... }"
+// @Router       /health [get]
 func (h *HealthHandler) HealthCheck(c *gin.Context) {
 	sqlDB, err := h.db.DB()
 	if err != nil {

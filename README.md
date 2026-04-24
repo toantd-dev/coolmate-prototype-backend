@@ -1,4 +1,4 @@
-# Xiteb Multivendor eCommerce Backend
+# Coolmate Multivendor eCommerce Backend
 
 Go + Gin backend for a comprehensive multivendor eCommerce platform. Features RBAC, vendor onboarding with KYC, product management with approval workflow, order splitting per vendor, and financial settlement system.
 
@@ -383,4 +383,4 @@ See `.env.example` for all configuration options.
 
 - **API Docs**: (Swagger endpoint TBD)
 - **Issues**: (GitHub issues when repo is created)
-- **Team**: Xiteb Team
+- **Team**: Coolmate Team

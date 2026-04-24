@@ -1,4 +1,4 @@
--- Initial database setup for Xiteb eCommerce
+-- Initial database setup for Coolmate eCommerce
 -- This script is run automatically by PostgreSQL initialization
 
 -- Create extensions

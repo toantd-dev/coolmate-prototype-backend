@@ -1,7 +1,7 @@
 # Backend Build Summary
 
 **Date**: April 23, 2026  
-**Project**: Xiteb Multivendor eCommerce Platform  
+**Project**: Coolmate Multivendor eCommerce Platform  
 **Stack**: Go + Gin + PostgreSQL + Redis + S3/MinIO  
 **Status**: ✅ MVP Foundation Complete
 

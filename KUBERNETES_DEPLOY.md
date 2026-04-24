@@ -1,6 +1,6 @@
 # Kubernetes Deployment Guide
 
-This guide covers deploying the Xiteb eCommerce backend to a Kubernetes cluster.
+This guide covers deploying the Coolmate eCommerce backend to a Kubernetes cluster.
 
 ## Prerequisites
 

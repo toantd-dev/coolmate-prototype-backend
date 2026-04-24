@@ -1,4 +1,4 @@
--- Setup script for Xiteb eCommerce PostgreSQL Database
+-- Setup script for Coolmate eCommerce PostgreSQL Database
 -- Run this script on your PostgreSQL server before starting the application
 
 -- Create database

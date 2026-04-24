@@ -25,10 +25,8 @@ ignore:
   - "cmd/"
   - "internal/repositories"
   - "internal/models"
-  - "internal/middleware"
   - "internal/config"
   - "internal/database"
-  - "internal/utils"
   - "pkg/"
 
 comment:

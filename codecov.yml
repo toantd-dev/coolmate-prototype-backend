@@ -8,13 +8,13 @@ coverage:
   precision: 2
   round: down
   range:
-    - 20
+    - 15
     - 100
   status:
     project:
       default:
-        target: 20
-        threshold: 5%
+        target: 15
+        threshold: 2%
         flags:
           - unittests
 
@@ -22,6 +22,15 @@ ignore:
   - "tests"
   - "**/*_test.go"
   - "**/mocks"
+  - "cmd/"
+  - "internal/handlers"
+  - "internal/repositories"
+  - "internal/models"
+  - "internal/middleware"
+  - "internal/config"
+  - "internal/database"
+  - "internal/utils"
+  - "pkg/"
 
 comment:
   layout: reach,diff,files

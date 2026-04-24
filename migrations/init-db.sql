@@ -1,4 +1,4 @@
--- Initial database setup for Coolmate
+-- Initial database setup for Coolmate ecommerce
 -- This script is run automatically by PostgreSQL initialization
 
 -- Create extensions

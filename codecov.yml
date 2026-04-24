@@ -23,7 +23,6 @@ ignore:
   - "**/*_test.go"
   - "**/mocks"
   - "cmd/"
-  - "internal/handlers"
   - "internal/repositories"
   - "internal/models"
   - "internal/middleware"

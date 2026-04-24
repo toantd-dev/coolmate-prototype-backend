@@ -10,11 +10,11 @@ import (
 )
 
 type ProductHandler struct {
-	productService *services.ProductService
+	productService services.IProductService
 }
 
 func NewProductHandler(productService interface{}) *ProductHandler {
-	ps, ok := productService.(*services.ProductService)
+	ps, ok := productService.(services.IProductService)
 	if !ok {
 		ps = nil
 	}
@@ -67,7 +67,7 @@ func (ph *ProductHandler) ListProducts(c *gin.Context) {
 	}
 
 	// Get products from service
-	products, total, err := ph.productService.ListProducts(search, offset, perPage)
+	products, total, err := ph.productService.ListProducts(search, perPage, offset)
 	if err != nil {
 		utils.InternalServerError(c, err.Error())
 		return

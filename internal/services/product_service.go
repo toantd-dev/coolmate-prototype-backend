@@ -11,6 +11,20 @@ import (
 	"github.com/coolmate/ecommerce-backend/pkg/cache"
 )
 
+type IProductService interface {
+	GetProductByID(id uint) (*models.Product, error)
+	ListProducts(search string, limit int, offset int) ([]models.Product, int64, error)
+	ListVendorProducts(vendorID uint, limit int, offset int) ([]models.Product, int64, error)
+	GetProductBySlug(slug string) (*models.Product, error)
+	CreateProduct(product *models.Product) error
+	UpdateProduct(product *models.Product) error
+	ApproveProduct(productID uint) error
+	RejectProduct(productID uint, reason string) error
+	GetCategories() ([]models.Category, error)
+	ListPendingApproval(limit int, offset int) ([]models.Product, int64, error)
+	ValidateProduct(product *models.Product) error
+}
+
 type ProductService struct {
 	productRepo repositories.IProductRepository
 	vendorRepo  repositories.IVendorRepository

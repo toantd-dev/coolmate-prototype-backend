@@ -43,6 +43,8 @@ vendor/
 .env.*.local
 .env.development
 .env.production
+# But allow test environment (needed for CI/CD)
+!.env.test
 
 # Database
 *.db

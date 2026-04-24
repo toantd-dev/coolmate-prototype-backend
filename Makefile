@@ -1,4 +1,4 @@
-.PHONY: help deps docker-up docker-down run migrate test test-coverage test-html test-verbose clean
+.PHONY: help deps docker-up docker-down run migrate test test-coverage test-html test-verbose test-bdd ac-coverage bdd-report clean
 
 help:
 	@echo "Coolmate eCommerce Backend - Available Commands"
@@ -65,6 +65,17 @@ test-html:
 test-verbose:
 	@echo "Running tests with verbose output..."
 	go test -v -cover ./... -timeout 120s
+
+test-bdd:
+	@echo "Running BDD acceptance tests (TestUS_*)..."
+	go test -v -run "^TestUS_" -timeout 120s ./internal/...
+
+ac-coverage:
+	@bash scripts/ac-coverage.sh
+
+bdd-report: test-bdd ac-coverage
+	@echo ""
+	@echo "BDD report complete. Line coverage stays green via existing AAA tests."
 
 clean:
 	@echo "Cleaning build artifacts..."

@@ -39,10 +39,14 @@ vendor/
 .DS_Store
 
 # Environment files
+.env
 .env.local
 .env.*.local
 .env.development
 .env.production
+
+# Root-level built binary (when devs run `go build` at repo root)
+/api
 
 # Database
 *.db

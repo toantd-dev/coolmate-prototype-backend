@@ -15,7 +15,7 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_DB: coolmate_test
+          POSTGRES_DB: coolmate_ecommerce_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         options: >-
@@ -49,9 +49,16 @@ jobs:
     - name: Install dependencies
       run: go mod download
 
+    - name: Load test environment
+      run: cp .env.test .env
+
     - name: Run tests with coverage
       env:
-        DATABASE_URL: postgres://postgres:postgres@localhost:5432/coolmate_test?sslmode=disable
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+        DB_NAME: coolmate_ecommerce_test
         REDIS_URL: redis://localhost:6379
       run: |
         go test ./... -v -coverprofile=coverage.out -covermode=atomic -timeout 120s

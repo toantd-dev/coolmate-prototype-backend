@@ -1,0 +1,38 @@
+# Codecov Configuration
+codecov:
+  require_ci_to_pass: true
+  precision: 2
+  round: down
+
+coverage:
+  precision: 2
+  round: down
+  range:
+    - 60
+    - 100
+
+ignore:
+  - "tests"
+  - "**/*_test.go"
+  - "**/mocks"
+
+comment:
+  layout: reach,diff,files
+  require_changes: false
+  require_base: false
+  require_head: true
+  behavior: default
+
+flags:
+  unittests:
+    carryforward: true
+    paths:
+      - internal/
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no

@@ -18,7 +18,10 @@ coverage_report.html
 coverage_services
 coverage_services.html
 coverage-report.txt
+coverage/
 UNIT_TEST_REPORT.txt
+test_report.json
+test_report.txt
 
 # Go workspace file
 go.work
@@ -29,6 +32,7 @@ vendor/
 # IDE
 .vscode/
 .idea/
+.claude/
 *.swp
 *.swo
 *~
@@ -37,6 +41,8 @@ vendor/
 # Environment files
 .env.local
 .env.*.local
+.env.development
+.env.production
 
 # Database
 *.db

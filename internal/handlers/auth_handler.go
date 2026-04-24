@@ -9,12 +9,16 @@ import (
 )
 
 type AuthHandler struct {
-	authService *services.AuthService
+	authService services.IAuthService
 }
 
-func NewAuthHandler(authService *services.AuthService) *AuthHandler {
+func NewAuthHandler(authService interface{}) *AuthHandler {
+	as, ok := authService.(services.IAuthService)
+	if !ok {
+		as = nil
+	}
 	return &AuthHandler{
-		authService: authService,
+		authService: as,
 	}
 }
 

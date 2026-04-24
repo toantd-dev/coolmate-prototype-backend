@@ -12,6 +12,13 @@ import (
 	"github.com/coolmate/ecommerce-backend/internal/utils"
 )
 
+type IAuthService interface {
+	Register(req *RegisterRequest) (*AuthResponse, error)
+	Login(req *LoginRequest) (*AuthResponse, error)
+	Refresh(refreshToken string) (*AuthResponse, error)
+	Logout(refreshToken string) error
+}
+
 type AuthService struct {
 	userRepo   repositories.IUserRepository
 	jwtManager *auth.JWTManager

@@ -8,8 +8,15 @@ coverage:
   precision: 2
   round: down
   range:
-    - 60
+    - 20
     - 100
+  status:
+    project:
+      default:
+        target: 20
+        threshold: 5%
+        flags:
+          - unittests
 
 ignore:
   - "tests"

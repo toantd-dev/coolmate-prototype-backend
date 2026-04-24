@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coolmate-config
+  namespace: coolmate
+data:
+  # Non-sensitive configuration
+  LOG_LEVEL: "info"
+  LOG_ENCODING: "json"
+  GIN_MODE: "release"
+  DB_MAX_OPEN_CONNS: "100"
+  DB_MAX_IDLE_CONNS: "20"
+  DB_SSLMODE: "require"
+  S3_REGION: "ap-southeast-1"
+  S3_USE_SSL: "true"
+  ENABLE_SWAGGER: "false"
+  ENABLE_PROFILING: "false"
+  CORS_ORIGINS: "https://coolmate.com,https://www.coolmate.com,https://api.coolmate.com"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: coolmate-secrets
+  namespace: coolmate
+type: Opaque
+stringData:
+  # Database credentials (change these!)
+  DB_USER: "coolmate_prod_user"
+  DB_PASSWORD: "CHANGE_ME_STRONG_PASSWORD"
+  DB_NAME: "coolmate_ecommerce"
+
+  # JWT Secret (change this!)
+  JWT_SECRET: "CHANGE_ME_LONG_RANDOM_STRING_AT_LEAST_64_CHARS_ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+  # AWS S3 credentials
+  AWS_ACCESS_KEY_ID: "CHANGE_ME"
+  AWS_SECRET_ACCESS_KEY: "CHANGE_ME"
+
+  # Email service credentials
+  SENDGRID_API_KEY: "CHANGE_ME"
+
+  # Monitoring
+  DATADOG_API_KEY: "CHANGE_ME"

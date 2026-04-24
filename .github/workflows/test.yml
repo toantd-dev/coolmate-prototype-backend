@@ -72,6 +72,16 @@ jobs:
         echo "COVERAGE_PERCENT=$COVERAGE" >> $GITHUB_ENV
         go tool cover -func=coverage.out | tail -20 > coverage_summary.txt
 
+    - name: Check Coverage Threshold
+      run: |
+        COVERAGE=$(go tool cover -func=coverage.out | tail -1 | awk '{print $3}' | sed 's/%//')
+        echo "Code Coverage: $COVERAGE%"
+        if (( $(echo "$COVERAGE < 60" | bc) == 1 )); then
+          echo "⚠️  Coverage $COVERAGE% below 60% threshold (warning only)"
+        else
+          echo "✅ Coverage $COVERAGE% meets 60% threshold"
+        fi
+
     - name: Generate coverage report
       run: go tool cover -html=coverage.out -o coverage_report.html
 
